@@ -1,0 +1,12 @@
+<table class="table table-striped">
+    <tr *ngFor="let u of accounts" (click)="editOne(u)">
+        <td>
+            <a [routerLink]="['/admin/account.module/edit/:id', {id: u.id}]">Edit</a>
+        </td>
+        <td>{{u.userName}}</td>
+        <td>{{u.firstName}}</td>
+        <td>{{u.lastName}}</td>
+        <td>{{u.age}}</td>
+        <td>{{u.email}}</td>
+    </tr>
+</table>
