@@ -9,8 +9,8 @@ import { concatMap, timeout, catchError, delay } from 'rxjs/operators';
 })
 export class AccountService {
 
-    list: Account[] = [new Account(1, 'john', 'abc', 'John', 'Doe', 'john@example.com', 18),
-    new Account(2, 'jane', 'abc', 'Jane', 'Doe', 'jane@example.com', 20)];
+    list: Account[] = [new Account(1, 1, 'john', 'abc', 'John', 'Doe', 'john@example.com', 18),
+    new Account(2, 1, 'jane', 'abc', 'Jane', 'Doe', 'jane@example.com', 20)];
 
     constructor() {
         console.log('Here it comes Pork!')
@@ -21,7 +21,6 @@ export class AccountService {
     }
 
     create(account: Account) {
-        console.log('Create a new account' + account);
         this.list.push(account);
     }
 

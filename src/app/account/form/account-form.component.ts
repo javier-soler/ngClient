@@ -13,7 +13,6 @@ export class AccountFormComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        this.acc = new Account(-1, '', '', '', '', '', 10);
     }
 
     submitForm(): void {

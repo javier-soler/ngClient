@@ -1,40 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-//rxjs
-import { Observable, of } from 'rxjs';
-import { AccountService } from '../service/account.service';
-import { Account } from '../account';
+import { ProfileService } from '../service/profile.service';
+import { Profile } from '../profile';
 
 
 @Component({
-    selector: 'app-details',
+    selector: 'app-profile-details',
     templateUrl: './details.component.html',
     styleUrls: ['./details.component.less']
 })
-export class AccountDetailsComponent implements OnInit {
+export class ProfileDetailsComponent implements OnInit {
 
-    acc: Account;
+    profile: Profile;
     isCreate = false;
-    constructor(private route: ActivatedRoute, private srv: AccountService) { }
+    constructor(private route: ActivatedRoute, private srv: ProfileService) { }
 
     ngOnInit() {
         if (this.route.snapshot.data.isNew) {
             this.isCreate = true;
-            this.acc = new Account(-1, 1, '', '', '', '', '', 0);
+            this.profile = new Profile(-1, 1, 'Nameless');
         } else {
             const id = this.route.snapshot.paramMap.get('id');
             this.srv.getAll().subscribe(l => {
-                this.acc = l.find(x => x.id === +id);
+                this.profile = l.find(x => x.id === +id);
             });
         }
     }
 
-    saveObject(a: Account): void {
+    saveObject(p: Profile): void {
         if (this.isCreate) {
-            this.srv.create(a);
+            this.srv.create(p);
         } else {
-            this.srv.update(a);
+            this.srv.update(p);
         }
     }
 

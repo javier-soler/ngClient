@@ -25,8 +25,4 @@ export class AccountListComponent implements OnInit {
     selectOne(u): void {
         this.selected = u;
     }
-
-    editOne(u): void {
-        this.router.navigate(['/admin/account.module/edit/:id', { id: u.id }]);
-    }
 }

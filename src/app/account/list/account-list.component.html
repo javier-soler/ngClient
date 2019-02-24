@@ -1,5 +1,5 @@
 <table class="table table-striped">
-    <tr *ngFor="let u of accounts" (click)="editOne(u)">
+    <tr *ngFor="let u of accounts">
         <td>
             <a [routerLink]="['/admin/account.module/edit/:id', {id: u.id}]">Edit</a>
         </td>

@@ -1,0 +1,10 @@
+<form>
+<div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputUserName">Usernamee</label>
+            <input id="inputName" name="name" type="text" class="form-control" placeholder="Profile Name"
+                [(ngModel)]="profile.name">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="submitForm()">Submit</button>
+</form>
