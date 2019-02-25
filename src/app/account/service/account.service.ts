@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Account } from '../account';
 import { Observable, of } from 'rxjs';
-import { concatMap, timeout, catchError, delay } from 'rxjs/operators';
+import { map, filter } from 'rxjs//operators';
+import { RestClientService } from '../../http/restclient.service';
+import { PageableResponse } from '../../http/pageable-response';
 
 
 @Injectable({
@@ -9,15 +11,19 @@ import { concatMap, timeout, catchError, delay } from 'rxjs/operators';
 })
 export class AccountService {
 
-    list: Account[] = [new Account(1, 1, 'john', 'abc', 'John', 'Doe', 'john@example.com', 18),
-    new Account(2, 1, 'jane', 'abc', 'Jane', 'Doe', 'jane@example.com', 20)];
+    list: Account[];
 
-    constructor() {
-        console.log('Here it comes Pork!')
+    constructor(private client: RestClientService<Account>) {
+        console.log('Here it comes Pork!');
     }
 
-    getAll(): Observable<Account[]> {
-        return of(this.list).pipe(delay(1000));
+    getList(page = 1): Observable<PageableResponse<Account>> {
+        return this.client.getList('/accounts', page - 1);
+    }
+
+
+    findById(id: number): Observable<Account> {
+        return this.client.getSingleObject('/accounts/' + id);
     }
 
     create(account: Account) {

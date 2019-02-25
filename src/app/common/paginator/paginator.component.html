@@ -1,0 +1,15 @@
+<nav aria-label="...">
+    <ul class="pagination">
+        <li class="page-item disabled">
+            <span class="page-link" (click)="goToPage(currentPage - 1)">Previous</span>
+        </li>
+        <li class="page-item" *ngFor="let p of pages">
+            <a class="page-link" (click)="goToPage(p.index)" href="javascript:void(0)">
+                {{p.index}}
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" (click)="goToPage(currentPage + 1)" href="#">Next</a>
+        </li>
+    </ul>
+</nav>

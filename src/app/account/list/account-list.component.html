@@ -1,12 +1,27 @@
 <table class="table table-striped">
-    <tr *ngFor="let u of accounts">
-        <td>
-            <a [routerLink]="['/admin/account.module/edit/:id', {id: u.id}]">Edit</a>
-        </td>
-        <td>{{u.userName}}</td>
-        <td>{{u.firstName}}</td>
-        <td>{{u.lastName}}</td>
-        <td>{{u.age}}</td>
-        <td>{{u.email}}</td>
-    </tr>
+    <thead>
+        <tr>
+            <th>Actions</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let u of accounts">
+            <td>
+                <a [routerLink]="['/admin/account.module/edit/:id', {id: u.id}]" title="Edit" alt="Edit">
+                    <i class="vv1 far fa-edit"></i>
+                </a>
+            </td>
+            <td>{{u.userName}}</td>
+            <td>{{u.firstName}}</td>
+            <td>{{u.lastName}}</td>
+            <td>{{u.age}}</td>
+            <td>{{u.email}}</td>
+        </tr>
+    </tbody>
 </table>
+<app-paginator *ngIf="page" [numPages]="page.totalPages" [currentPage]="page.num" (pageNavigator)="goToPage($event)"></app-paginator>

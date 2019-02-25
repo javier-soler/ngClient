@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 //rxjs
 import { Observable, of } from 'rxjs';
@@ -16,7 +16,7 @@ export class AccountDetailsComponent implements OnInit {
 
     acc: Account;
     isCreate = false;
-    constructor(private route: ActivatedRoute, private srv: AccountService) { }
+    constructor(private router: Router, private route: ActivatedRoute, private srv: AccountService) { }
 
     ngOnInit() {
         if (this.route.snapshot.data.isNew) {
@@ -24,9 +24,7 @@ export class AccountDetailsComponent implements OnInit {
             this.acc = new Account(-1, 1, '', '', '', '', '', 0);
         } else {
             const id = this.route.snapshot.paramMap.get('id');
-            this.srv.getAll().subscribe(l => {
-                this.acc = l.find(x => x.id === +id);
-            });
+            this.srv.findById(+id).subscribe(a => this.acc = a);
         }
     }
 
@@ -36,6 +34,8 @@ export class AccountDetailsComponent implements OnInit {
         } else {
             this.srv.update(a);
         }
+
+        this.router.navigate(['/admin/account.module']);
     }
 
 }

@@ -1,7 +1,9 @@
 <table class="table table-striped">
     <tr *ngFor="let p of list">
         <td>
-            <a [routerLink]="['/admin/account.module/profiles/edit/:id', {id: p.id}]">Edit</a>
+            <a [routerLink]="['/admin/account.module/profiles/edit/:id', {id: p.id}]" title="Edit" alt="Edit">
+                <i class="vv1 far fa-edit"></i>
+            </a>
         </td>
         <td>{{p.name}}</td>
     </tr>

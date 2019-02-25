@@ -10,6 +10,11 @@ import { ProfileListComponent } from './profile/list/profile-list.component';
 import { ProfileFormComponent } from './profile/form/form.component';
 import { ProfileDetailsComponent } from './profile/details/details.component';
 
+
+
+import { VoyVasHttpModule } from '../http/voyvas-http.module';
+import { VoyVasCommonModule } from '../common/voyvas-common.module';
+
 @NgModule({
     declarations: [
         AccountFormComponent,
@@ -23,7 +28,10 @@ import { ProfileDetailsComponent } from './profile/details/details.component';
         CommonModule,
         HttpClientModule,
         FormsModule,
-        AccountRoutingModule
+        AccountRoutingModule,
+        VoyVasHttpModule,
+        VoyVasCommonModule
     ]
 })
+
 export class AccountModule { }

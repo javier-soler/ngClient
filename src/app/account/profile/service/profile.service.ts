@@ -9,8 +9,8 @@ export class ProfileService {
 
     list = [
         new Profile(1, 1, 'Employee'),
-        new Profile(1, 1, 'Manager'),
-        new Profile(1, 1, 'SuperAdmin')
+        new Profile(2, 1, 'Manager'),
+        new Profile(3, 1, 'SuperAdmin')
     ];
 
     constructor() { }

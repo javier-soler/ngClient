@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 
@@ -10,7 +9,6 @@ import { AppComponent } from './app.component';
 import { AccountModule } from './account/account.module';
 import { MenuComponent } from './menu/menu.component';
 
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -19,7 +17,6 @@ import { MenuComponent } from './menu/menu.component';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        HttpClientModule,
         FormsModule,
         AccountModule
     ],

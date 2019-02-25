@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ProfileService } from '../service/profile.service';
 import { Profile } from '../profile';
@@ -14,7 +14,7 @@ export class ProfileDetailsComponent implements OnInit {
 
     profile: Profile;
     isCreate = false;
-    constructor(private route: ActivatedRoute, private srv: ProfileService) { }
+    constructor(private router: Router, private route: ActivatedRoute, private srv: ProfileService) { }
 
     ngOnInit() {
         if (this.route.snapshot.data.isNew) {
@@ -34,6 +34,7 @@ export class ProfileDetailsComponent implements OnInit {
         } else {
             this.srv.update(p);
         }
+        this.router.navigate(['/admin/account.module/profiles']);
     }
 
 }
