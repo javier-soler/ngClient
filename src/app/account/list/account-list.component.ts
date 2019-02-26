@@ -3,6 +3,7 @@ import { AccountService } from '../service/account.service';
 import { Account } from '../account';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Page } from '../../http/page';
+import { CONFIRMATION_YES } from 'src/app/common/prompts/confirmation-dialog.component';
 
 @Component({
     selector: 'app-acc-list',
@@ -11,9 +12,10 @@ import { Page } from '../../http/page';
 })
 export class AccountListComponent implements OnInit {
 
-    accounts: Account[];
-    selected: Account;
-    page: Page;
+    public accounts: Account[];
+    public selected: Account;
+    public page: Page;
+    public showDeleteMessage = false;
     constructor(private accSrv: AccountService, private router: Router, private activeRoute: ActivatedRoute) { }
 
     ngOnInit() {
@@ -30,11 +32,20 @@ export class AccountListComponent implements OnInit {
         });
     }
 
-    selectOne(u): void {
-        this.selected = u;
-    }
-
     goToPage(i: number): void {
         this.router.navigate(['/admin/account.module'], { queryParams: { page: i } });
+    }
+
+    deleteAccount(a: Account): void {
+        this.selected = a;
+        this.showDeleteMessage = true;
+    }
+
+    deleteAction(a) {
+        if (a === CONFIRMATION_YES) {
+            this.showDeleteMessage = false;
+        } else {
+            this.showDeleteMessage = false;
+        }
     }
 }

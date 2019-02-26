@@ -1,7 +1,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Actions</th>
+            <th colspan="2">Actions</th>
             <th>Username</th>
             <th>First Name</th>
             <th>Last Name</th>
@@ -16,6 +16,11 @@
                     <i class="vv1 far fa-edit"></i>
                 </a>
             </td>
+            <td>
+                <a (click)="deleteAccount(u)" title="Edit" alt="Edit">
+                    <i class="vv1 far fa-edit"></i>
+                </a>
+            </td>
             <td>{{u.userName}}</td>
             <td>{{u.firstName}}</td>
             <td>{{u.lastName}}</td>
@@ -25,3 +30,4 @@
     </tbody>
 </table>
 <app-paginator *ngIf="page" [numPages]="page.totalPages" [currentPage]="page.num" (pageNavigator)="goToPage($event)"></app-paginator>
+<app-confirmation [show]="showDeleteMessage" [message]="Yay" (action)="deleteAction($event)"></app-confirmation>
