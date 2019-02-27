@@ -16,6 +16,7 @@ export class AccountDetailsComponent implements OnInit {
 
     acc: Account;
     isCreate = false;
+    loading = true;
     constructor(private router: Router, private route: ActivatedRoute, private srv: AccountService) { }
 
     ngOnInit() {
@@ -24,7 +25,7 @@ export class AccountDetailsComponent implements OnInit {
             this.acc = new Account(-1, 1, '', '', '', '', '', 0);
         } else {
             const id = this.route.snapshot.paramMap.get('id');
-            this.srv.findById(+id).subscribe(a => this.acc = a);
+            this.srv.findById(+id).subscribe(a => { this.acc = a; this.loading = false; });
         }
     }
 
@@ -38,6 +39,7 @@ export class AccountDetailsComponent implements OnInit {
 
             this.router.navigate(['/admin/account.module']);
         }
+        this.loading = false;
     }
 
 }

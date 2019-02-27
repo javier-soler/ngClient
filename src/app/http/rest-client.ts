@@ -31,17 +31,15 @@ export class RestClient<T> {
     }
 
     getSingleObject(id: number): Observable<T> {
-        const httpOptions = this.buildHttpOptions();
-        return this.http.get<T>(this.fullUri + '/' + id, {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                Authorization: 'my-auth-token'
-            })
-        });
+        return this.http.get<T>(this.fullUri + '/' + id, this.buildHttpOptions());
     }
 
     create(o: T): Observable<any> {
         return this.http.post(this.fullUri, o, this.buildHttpOptions());
+    }
+
+    delete(id: number): Observable<any> {
+        return this.http.delete<any>(this.fullUri + '/' + id, this.buildHttpOptions()).pipe(map(x => true));
     }
 
 

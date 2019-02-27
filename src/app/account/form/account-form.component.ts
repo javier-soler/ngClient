@@ -13,6 +13,7 @@ export class AccountFormComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
+        this.acc = Object.create(this.acc);
     }
 
     submitForm(): void {

@@ -16,6 +16,7 @@ export class AccountListComponent implements OnInit {
     public selected: Account;
     public page: Page;
     public showDeleteMessage = false;
+    public loading = true;
     constructor(private accSrv: AccountService, private router: Router, private activeRoute: ActivatedRoute) { }
 
     ngOnInit() {
@@ -23,11 +24,13 @@ export class AccountListComponent implements OnInit {
     }
 
     loadUsers(): void {
+        this.loading = true;
         this.activeRoute.queryParams.subscribe(params => {
             const pageNum = +params['page'] || 1;
             this.accSrv.getList(pageNum).subscribe(p => {
                 this.accounts = p.data;
                 this.page = p.page;
+                this.loading = false;
             });
         });
     }
@@ -41,9 +44,13 @@ export class AccountListComponent implements OnInit {
         this.showDeleteMessage = true;
     }
 
-    deleteAction(a) {
+    deleteConfimationResponse(a: number) {
         if (a === CONFIRMATION_YES) {
-            this.showDeleteMessage = false;
+            this.accSrv.delete(this.selected)
+                .subscribe(r => {
+                    this.showDeleteMessage = false;
+                    this.loadUsers();
+                });
         } else {
             this.showDeleteMessage = false;
         }

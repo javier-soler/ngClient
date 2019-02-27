@@ -1,1 +1,4 @@
-<app-account-form [acc]="acc" (submittEmitter)="saveObject($event)"></app-account-form>
+<app-loading [show]="loading"></app-loading>
+<div *ngIf="!loading">
+    <app-account-form [acc]="acc" (submittEmitter)="saveObject($event)"></app-account-form>
+</div>

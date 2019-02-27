@@ -1,15 +1,21 @@
 <nav aria-label="...">
     <ul class="pagination">
-        <li class="page-item disabled">
-            <span class="page-link" (click)="goToPage(currentPage - 1)">Previous</span>
+        <li class="page-item" *ngIf="hasPrev">
+            <a class="page-link" (click)="goToPage(0)" href="javascript:void(0)">First</a>
         </li>
-        <li class="page-item" *ngFor="let p of pages">
-            <a class="page-link" (click)="goToPage(p.index)" href="javascript:void(0)">
-                {{p.index}}
+        <li class="page-item" *ngIf="hasPrev">
+            <a class="page-link" (click)="goToPage(currentPage - 1)" href="javascript:void(0)">Previous</a>
+        </li>
+        <li [class]="p.current?'page-item active':'page-item'" *ngFor="let p of pages">
+            <a class="page-link" (click)="goToPage(p.index)" href="javascript:void(0)" ng-attr-="p.current">
+                {{p.index + 1}}
             </a>
         </li>
-        <li class="page-item">
-            <a class="page-link" (click)="goToPage(currentPage + 1)" href="#">Next</a>
+        <li class="page-item" *ngIf="hasNext">
+            <a class="page-link" (click)="goToPage(currentPage + 1)" href="javascript:void(0)">Next</a>
+        </li>
+        <li class="page-item" *ngIf="hasNext">
+            <a class="page-link" (click)="goToPage(numPages - 1)" href="javascript:void(0)">Last</a>
         </li>
     </ul>
 </nav>

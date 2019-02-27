@@ -35,8 +35,9 @@ export class AccountService {
 
     update(account: Account) { }
 
-    delete(user: Account) {
-     }
+    delete(account: Account): Observable<boolean> {
+        return this.client.delete(account.id);
+    }
 
 
 

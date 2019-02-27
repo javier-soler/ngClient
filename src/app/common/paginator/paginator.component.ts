@@ -1,20 +1,24 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, SimpleChanges, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'app-paginator',
     templateUrl: './paginator.component.html',
     styleUrls: ['./paginator.component.less']
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent implements OnChanges {
 
     @Input() numPages: number;
     @Input() currentPage: number;
-    pages = [];
     @Output() pageNavigator = new EventEmitter<number>();
+
+
+    public pages = [];
+    public hasPrev = false;
+    public hasNext = false;
 
     constructor() { }
 
-    ngOnInit() {
+    ngOnChanges(changes: SimpleChanges): void {
         this.generatePages();
     }
 
@@ -22,14 +26,18 @@ export class PaginatorComponent implements OnInit {
         this.pages = Array.from(Array(this.numPages).keys())
             .map(i => {
                 return {
-                    index: i + 1,
-                    current: i === (this.currentPage - 1)
+                    index: i,
+                    current: i === this.currentPage
                 };
             });
+        if (this.pages.length > 1) {
+            this.hasPrev = this.currentPage > 0;
+            this.hasNext = this.currentPage < this.numPages - 1;
+        }
     }
 
     goToPage(i: number): void {
-        this.pageNavigator.emit(i);
+        this.pageNavigator.emit(i + 1);
     }
 
 }
