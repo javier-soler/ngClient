@@ -16,7 +16,7 @@ export class RestClient<T> {
     }
 
     getList(path: string, pageNum = 0, size = 10): Observable<PageableResponse<T>> {
-        const httpOptions = this.buildHttpOptions({
+        const httpOptions = this.ctx.buildHttpOptions({
             params: {
                 size: +size,
                 page: String(pageNum)
@@ -32,33 +32,18 @@ export class RestClient<T> {
     }
 
     getSingleObject(id: number): Observable<T> {
-        return this.http.get<T>(this.fullUri + '/' + id, this.buildHttpOptions());
+        return this.http.get<T>(this.fullUri + '/' + id, this.ctx.buildHttpOptions());
     }
 
     create(o: T): Observable<any> {
-        return this.http.post(this.fullUri, o, this.buildHttpOptions());
+        return this.http.post(this.fullUri, o, this.ctx.buildHttpOptions());
     }
 
     update(o: T): Observable<any> {
-        return this.http.put(this.fullUri + '/' + o['id'], o, this.buildHttpOptions());
+        return this.http.put(this.fullUri + '/' + o['id'], o, this.ctx.buildHttpOptions());
     }
 
     delete(id: number): Observable<any> {
-        return this.http.delete<any>(this.fullUri + '/' + id, this.buildHttpOptions()).pipe(map(x => true));
-    }
-
-
-    buildHttpOptions(additional?): {
-        headers?: HttpHeaders | {
-            [header: string]: string | string[];
-        };
-    } {
-        return {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                Authorization: 'my-auth-token'
-            }),
-            ...additional
-        }
+        return this.http.delete<any>(this.fullUri + '/' + id, this.ctx.buildHttpOptions()).pipe(map(x => true));
     }
 }
