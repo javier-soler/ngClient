@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountDetailsComponent } from './details/details.component';
 import { AccountFormComponent } from './form/account-form.component';
 import { AccountListComponent } from './list/account-list.component';
@@ -30,7 +30,8 @@ import { VoyVasCommonModule } from '../common/voyvas-common.module';
         FormsModule,
         AccountRoutingModule,
         VoyVasHttpModule,
-        VoyVasCommonModule
+        VoyVasCommonModule,
+        ReactiveFormsModule
     ]
 })
 

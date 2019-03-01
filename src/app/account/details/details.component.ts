@@ -23,9 +23,10 @@ export class AccountDetailsComponent implements OnInit {
         if (this.route.snapshot.data.isNew) {
             this.isCreate = true;
             this.acc = new Account(-1, 1, '', '', '', '', '', 0);
+            this.stopLoading();
         } else {
             const id = this.route.snapshot.paramMap.get('id');
-            this.srv.findById(+id).subscribe(a => { this.acc = a; this.loading = false; });
+            this.srv.findById(+id).subscribe(a => { this.acc = a; this.stopLoading(); });
         }
     }
 
@@ -35,10 +36,14 @@ export class AccountDetailsComponent implements OnInit {
                 this.router.navigate(['/admin/account.module']);
             });
         } else {
-            this.srv.update(a);
-
-            this.router.navigate(['/admin/account.module']);
+            this.srv.update(a).subscribe(x => {
+                this.router.navigate(['/admin/account.module']);
+            });
         }
+        this.stopLoading();
+    }
+
+    stopLoading(): void {
         this.loading = false;
     }
 

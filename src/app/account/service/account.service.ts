@@ -6,6 +6,7 @@ import { RestClientService } from '../../http/restclient.service';
 import { PageableResponse } from '../../http/pageable-response';
 import { RestClient } from 'src/app/http/rest-client';
 import { HttpClient } from '@angular/common/http';
+import { AppCtxService } from 'src/app/app-context.service';
 
 
 @Injectable({
@@ -16,8 +17,8 @@ export class AccountService {
     list: Account[];
     private client: RestClient<Account>;
 
-    constructor(private http: HttpClient) {
-        this.client = new RestClient<Account>('/accounts', http);
+    constructor(private http: HttpClient, private ctx: AppCtxService) {
+        this.client = new RestClient<Account>(ctx, '/accounts', http);
     }
 
     getList(page = 1): Observable<PageableResponse<Account>> {
@@ -33,7 +34,9 @@ export class AccountService {
         return this.client.create(account);
     }
 
-    update(account: Account) { }
+    update(account: Account) {
+        return this.client.update(account);
+    }
 
     delete(account: Account): Observable<boolean> {
         return this.client.delete(account.id);

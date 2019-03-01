@@ -13,6 +13,11 @@ const routes: Routes = [
     { path: 'admin/account.module/profiles', component: ProfileListComponent },
     { path: 'admin/account.module/profiles/edit/:id', component: ProfileDetailsComponent, data: { isNew: false } },
     { path: 'admin/account.module/profiles/create', component: ProfileDetailsComponent, data: { isNew: true } },
+    {
+        path: '',
+        redirectTo: '/admin/account.module',
+        pathMatch: 'full'
+    },
 
 ];
 

@@ -6,15 +6,19 @@ import { ConfirmationDialogComponent } from './prompts/confirmation-dialog.compo
 import { LoadingComponent } from './spinner/loading/loading.component';
 
 @NgModule({
-    declarations: [PaginatorComponent,
+    declarations: [
+        PaginatorComponent,
         ConfirmationDialogComponent,
-        LoadingComponent],
+        LoadingComponent
+    ],
     imports: [
         CommonModule,
         FormsModule
     ],
-    exports: [PaginatorComponent,
+    exports: [
+        PaginatorComponent,
         ConfirmationDialogComponent,
-        LoadingComponent]
+        LoadingComponent
+    ]
 })
 export class VoyVasCommonModule { }

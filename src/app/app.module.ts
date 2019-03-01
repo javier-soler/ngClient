@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AccountModule } from './account/account.module';
 import { MenuComponent } from './menu/menu.component';
+import { AppCtxService } from './app-context.service';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { MenuComponent } from './menu/menu.component';
         FormsModule,
         AccountModule
     ],
-    providers: [],
+    providers: [AppCtxService],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

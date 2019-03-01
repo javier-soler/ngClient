@@ -3,15 +3,16 @@ import { Observable } from 'rxjs';
 import { PageableResponse } from './pageable-response';
 import { Page } from './page';
 import { map } from 'rxjs/operators';
+import { AppCtxService } from '../app-context.service';
 
-const BASE_PATH = 'http://localhost:9020';
 
 export class RestClient<T> {
 
     private fullUri: string;
 
-    constructor(private resourcePath: string, private http: HttpClient) {
-        this.fullUri = BASE_PATH + resourcePath;
+    constructor(private ctx: AppCtxService, private resourcePath: string, private http: HttpClient) {
+        console.log(ctx.baseUri);
+        this.fullUri = ctx.baseUri + resourcePath;
     }
 
     getList(path: string, pageNum = 0, size = 10): Observable<PageableResponse<T>> {
@@ -36,6 +37,10 @@ export class RestClient<T> {
 
     create(o: T): Observable<any> {
         return this.http.post(this.fullUri, o, this.buildHttpOptions());
+    }
+
+    update(o: T): Observable<any> {
+        return this.http.put(this.fullUri + '/' + o['id'], o, this.buildHttpOptions());
     }
 
     delete(id: number): Observable<any> {
