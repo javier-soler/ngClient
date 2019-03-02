@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountDetailsComponent } from './details/details.component';
 import { AccountFormComponent } from './form/account-form.component';
@@ -27,6 +27,7 @@ import { VoyVasCommonModule } from '../common/voyvas-common.module';
     imports: [
         CommonModule,
         HttpClientModule,
+        HttpClientXsrfModule,
         FormsModule,
         AccountRoutingModule,
         VoyVasHttpModule,

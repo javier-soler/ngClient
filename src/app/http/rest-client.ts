@@ -11,11 +11,10 @@ export class RestClient<T> {
     private fullUri: string;
 
     constructor(private ctx: AppCtxService, private resourcePath: string, private http: HttpClient) {
-        console.log(ctx.baseUri);
         this.fullUri = ctx.baseUri + resourcePath;
     }
 
-    getList(path: string, pageNum = 0, size = 10): Observable<PageableResponse<T>> {
+    getList(pageNum = 0, size = 10): Observable<PageableResponse<T>> {
         const httpOptions = this.ctx.buildHttpOptions({
             params: {
                 size: +size,

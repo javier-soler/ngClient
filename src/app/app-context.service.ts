@@ -14,8 +14,8 @@ export class AppCtxService {
     }
 
     onInit(): void {
-        this.baseUri = 'http://localhost:9020';
-        this.http.get<Principal>(this.baseUri + '/me', this.buildHttpOptions())
+        this.baseUri = '';
+        this.http.get<Principal>(this.baseUri + '/user/me', this.buildHttpOptions())
             .subscribe(r => this.principal = r);
     }
 
@@ -26,8 +26,7 @@ export class AppCtxService {
     } {
         return {
             headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                authorization: 'Basic ' + btoa('user1:user')
+                'Content-Type': 'application/json'
             }),
             ...additional
         };
