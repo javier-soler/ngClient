@@ -14,6 +14,6 @@ export class ProfileListComponent extends BaseListComponent<Profile> {
     constructor(_srv: ProfileService,
         _router: Router,
         _activeRoute: ActivatedRoute) {
-        super('admin/account.module/profile', _srv, _router, _activeRoute);
+        super(_srv, _router, _activeRoute);
     }
 }

@@ -10,14 +10,14 @@ export class MenuService {
     menu = [
         {
             title: 'Account Management', items: [
-                { path: 'admin/account.module', title: 'Accounts' },
-                { path: 'admin/account.module/create', title: 'Create New' }
+                { path: 'web/account', title: 'Accounts' },
+                { path: 'web/account/create', title: 'Create New' }
             ]
         },
         {
             title: 'Security Profiles', items: [
-                { path: 'admin/account.module/profiles', title: 'Security Profiles' },
-                { path: 'admin/account.module/profiles/create', title: 'Create Security Profiles' }
+                { path: 'web/account/profiles', title: 'Security Profiles' },
+                { path: 'web/account/profiles/create', title: 'Create Security Profiles' }
             ]
         }
     ];

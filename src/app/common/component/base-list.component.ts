@@ -11,7 +11,7 @@ export class BaseListComponent<T extends { id: number }> implements OnInit {
     public showDeleteMessage = false;
     public loading = true;
 
-    constructor(private ngUri: string, private srv: BaseRestService<T>, private router: Router, private activeRoute: ActivatedRoute) { }
+    constructor(private srv: BaseRestService<T>, private router: Router, private activeRoute: ActivatedRoute) { }
 
     ngOnInit() {
         this.loadUsers();
@@ -30,7 +30,7 @@ export class BaseListComponent<T extends { id: number }> implements OnInit {
     }
 
     goToPage(i: number): void {
-        this.router.navigate([this.ngUri], { queryParams: { page: i } });
+        this.router.navigate(['./'], { queryParams: { page: i }, relativeTo: this.activeRoute });
     }
 
     deleteObject(a: T): void {

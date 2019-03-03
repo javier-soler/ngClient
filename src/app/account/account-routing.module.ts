@@ -4,25 +4,26 @@ import { AccountListComponent } from './list/account-list.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ProfileListComponent } from './profile/list/profile-list.component';
 import { ProfileDetailsComponent } from './profile/details/details.component';
+import { AccountComponent } from './account.component';
 
 const routes: Routes = [
-    { path: 'admin/account.module', component: AccountListComponent },
-    { path: 'admin/account.module/edit/:id', component: AccountDetailsComponent, data: { isNew: false } },
-    { path: 'admin/account.module/create', component: AccountDetailsComponent, data: { isNew: true } },
-
-    { path: 'admin/account.module/profiles', component: ProfileListComponent },
-    { path: 'admin/account.module/profiles/edit/:id', component: ProfileDetailsComponent, data: { isNew: false } },
-    { path: 'admin/account.module/profiles/create', component: ProfileDetailsComponent, data: { isNew: true } },
     {
         path: '',
-        redirectTo: '/admin/account.module',
-        pathMatch: 'full'
-    },
+        component: AccountComponent,
+        children: [            
+            { path: 'profiles', component: ProfileListComponent },
+            { path: 'profiles/create', component: ProfileDetailsComponent, data: { isNew: true } },
+            { path: 'profiles/:id', component: ProfileDetailsComponent, data: { isNew: false } },
+            { path: '', component: AccountListComponent },
+            { path: 'create', component: AccountDetailsComponent, data: { isNew: true } },
+            { path: ':id', component: AccountDetailsComponent, data: { isNew: false } }
+        ]
+    }
 
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
 export class AccountRoutingModule { }

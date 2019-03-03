@@ -13,6 +13,6 @@ export class AccountListComponent extends BaseListComponent<Account>{
     constructor(_srv: AccountService,
         _router: Router,
         _activeRoute: ActivatedRoute) {
-        super('admin/account.module', _srv, _router, _activeRoute);
+        super(_srv, _router, _activeRoute);
     }
 }

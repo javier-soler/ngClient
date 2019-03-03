@@ -6,20 +6,22 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AccountModule } from './account/account.module';
 import { MenuComponent } from './menu/menu.component';
 import { AppCtxService } from './app-context.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
         AppComponent,
-        MenuComponent
+        MenuComponent,
+        PageNotFoundComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        AccountModule
+        HttpClientModule
     ],
     providers: [AppCtxService],
     bootstrap: [AppComponent]

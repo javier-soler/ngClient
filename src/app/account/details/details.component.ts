@@ -33,11 +33,11 @@ export class AccountDetailsComponent implements OnInit {
     saveObject(a: Account): void {
         if (this.isCreate) {
             this.srv.create(a).subscribe(x => {
-                this.router.navigate(['/admin/account.module']);
+                this.router.navigate(['../'], {relativeTo: this.route});
             });
         } else {
             this.srv.update(a).subscribe(x => {
-                this.router.navigate(['/admin/account.module']);
+                this.router.navigate(['../'], {relativeTo: this.route});
             });
         }
         this.stopLoading();

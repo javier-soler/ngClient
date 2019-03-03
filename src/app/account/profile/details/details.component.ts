@@ -40,7 +40,7 @@ export class ProfileDetailsComponent implements OnInit {
         } else {
             r = this.srv.update(p);
         }
-        r.subscribe(x => { this.router.navigate(['/admin/account.module/profiles']); })
+        r.subscribe(x => { this.router.navigate(['../'], { relativeTo: this.route }); })
     }
 
 }

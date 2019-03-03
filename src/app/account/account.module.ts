@@ -14,9 +14,11 @@ import { ProfileDetailsComponent } from './profile/details/details.component';
 
 import { VoyVasHttpModule } from '../http/voyvas-http.module';
 import { VoyVasCommonModule } from '../common/voyvas-common.module';
+import { AccountComponent } from './account.component';
 
 @NgModule({
     declarations: [
+        AccountComponent,
         AccountFormComponent,
         AccountDetailsComponent,
         AccountListComponent,
