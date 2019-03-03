@@ -1,10 +1,18 @@
-<form>
+<form [formGroup]= "profileForm">
 <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputUserName">Profile Name</label>
             <input id="inputName" name="name" type="text" class="form-control" placeholder="Profile Name"
-                [(ngModel)]="profile.name">
+            formControlName="name">
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                <div *ngIf="name.errors.required">
+                    Name is required.
+                </div>
+                <div *ngIf="name.errors.maxlength">
+                    To many characters.
+                </div>
+            </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary" (click)="submitForm()">Submit</button>
+    <button type="submit" class="btn btn-primary" (click)="submitForm()" [disabled]="!profileForm.valid">Submit</button>
 </form>

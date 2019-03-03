@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AppCtxService } from '../app-context.service';
-import { PageableResponse } from './pageable-response';
-import { RestClient } from './rest-client';
+import { AppCtxService } from '../../app-context.service';
+import { PageableResponse } from '../service/pageable-response';
+import { RestClient } from '../service/rest-client';
 
 
 @Injectable({
@@ -13,8 +13,8 @@ export class BaseRestService<T extends { id: number }> {
     private list: T[];
     private client: RestClient<T>;
 
-    constructor(private uri: string, private http: HttpClient, private ctx: AppCtxService) {
-        this.client = new RestClient<T>(ctx, this.uri, http);
+    constructor(embeddedKey: string, uri: string, http: HttpClient, private ctx: AppCtxService) {
+        this.client = new RestClient<T>(embeddedKey, uri, ctx, http);
     }
 
     getList(page = 1): Observable<PageableResponse<T>> {

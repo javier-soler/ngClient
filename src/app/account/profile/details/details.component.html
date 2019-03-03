@@ -1,1 +1,4 @@
-<app-profile-form [profile]="profile" (submittEmitter)="saveObject($event)"></app-profile-form>
+<app-loading [show]="loading"></app-loading>
+<div *ngIf="!loading">
+    <app-profile-form [profile]="profile" (submittEmitter)="saveObject($event)"></app-profile-form>
+</div>

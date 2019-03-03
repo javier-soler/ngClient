@@ -5,7 +5,6 @@
             <input id="inputUserName" name="username" type="text" class="form-control" placeholder="First Name"
                 formControlName="userName">
             <div *ngIf="userName.invalid && (userName.dirty || userName.touched)" class="alert alert-danger">
-
                 <div *ngIf="userName.errors.required">
                     Name is required.
                 </div>

@@ -12,13 +12,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let u of accounts">
+            <tr *ngFor="let u of list">
                 <td>
                     <a class="vv-link1" [routerLink]="['/admin/account.module/edit/:id', {id: u.id}]" title="Edit"
                         alt="Edit">
                         <i class="vv1 far fa-edit"></i>
                     </a>
-                    <a style="margin-left: 6px" (click)="deleteAccount(u)" href="javascript:void(0)" title="Edit"
+                    <a style="margin-left: 6px" (click)="deleteObject(u)" href="javascript:void(0)" title="Edit"
                         alt="Edit">
                         <i class="vv1 far fa-trash-alt"></i>
                     </a>

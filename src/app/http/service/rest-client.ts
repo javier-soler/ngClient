@@ -3,14 +3,14 @@ import { Observable } from 'rxjs';
 import { PageableResponse } from './pageable-response';
 import { Page } from './page';
 import { map } from 'rxjs/operators';
-import { AppCtxService } from '../app-context.service';
+import { AppCtxService } from '../../app-context.service';
 
 
 export class RestClient<T> {
 
     private fullUri: string;
 
-    constructor(private ctx: AppCtxService, private resourcePath: string, private http: HttpClient) {
+    constructor(private embeddedKey: string, private resourcePath: string, private ctx: AppCtxService, private http: HttpClient) {
         this.fullUri = ctx.baseUri + resourcePath;
     }
 
@@ -26,7 +26,7 @@ export class RestClient<T> {
             .pipe(map(d => {
                 const p = d.page;
                 const page = new Page(p.number, p.size, p.totalElements, p.totalPages);
-                return new PageableResponse<T>(d._embedded.accounts, d._links, page);
+                return new PageableResponse<T>(d._embedded[this.embeddedKey], d._links, page);
             }));
     }
 

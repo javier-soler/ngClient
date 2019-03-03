@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from '../profile';
 import { ProfileService } from '../service/profile.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { BaseListComponent } from 'src/app/common/component/base-list.component';
 
 
 @Component({
@@ -9,13 +10,10 @@ import { Router } from '@angular/router';
     templateUrl: './profile-list.component.html',
     styleUrls: ['./profile-list.component.less']
 })
-export class ProfileListComponent implements OnInit {
-
-    public list: Profile[];
-    constructor(private srv: ProfileService, private router: Router) { }
-
-    ngOnInit() {
-        this.srv.getAll().subscribe(el => this.list = el);
+export class ProfileListComponent extends BaseListComponent<Profile> {
+    constructor(_srv: ProfileService,
+        _router: Router,
+        _activeRoute: ActivatedRoute) {
+        super('admin/account.module/profile', _srv, _router, _activeRoute);
     }
-
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BaseRestService } from 'src/app/http/base-rest.service';
+import { BaseRestService } from 'src/app/http/rest/base-rest.service';
 import { Account } from '../account';
 import { AppCtxService } from 'src/app/app-context.service';
 import { HttpClient } from '@angular/common/http';
@@ -10,6 +10,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AccountService extends BaseRestService<Account>{
     constructor(_http: HttpClient, _ctx: AppCtxService) {
-        super('/user/accounts', _http, _ctx);
+        super('accounts', '/user/accounts', _http, _ctx);
     }
 }

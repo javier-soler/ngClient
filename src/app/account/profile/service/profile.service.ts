@@ -1,29 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Profile } from '../profile';
 import { Observable, of } from 'rxjs';
+import { BaseRestService } from 'src/app/http/rest/base-rest.service';
+import { HttpClient } from '@angular/common/http';
+import { AppCtxService } from 'src/app/app-context.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ProfileService {
-
-    list = [
-        new Profile(1, 1, 'Employee'),
-        new Profile(2, 1, 'Manager'),
-        new Profile(3, 1, 'SuperAdmin')
-    ];
-
-    constructor() { }
-
-    getAll(): Observable<Profile[]> {
-        return of(this.list);
+export class ProfileService extends BaseRestService<Profile> {
+    constructor(_http: HttpClient, _ctx: AppCtxService) {
+        super('profiles', '/user/profiles', _http, _ctx);
     }
-
-    create(p: Profile) {
-        this.list.push(p);
-    }
-
-    update(p: Profile) { }
-
-    delete(user: Account) { }
 }
