@@ -13,7 +13,7 @@ export class AccountFormComponent implements OnInit {
     accountForm = this.fb.group({
         id: [''],
         userName: ['', Validators.required],
-        password: [''],
+        plainTextPassword: [''],
         rePassword: [''],
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],

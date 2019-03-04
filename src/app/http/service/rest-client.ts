@@ -10,7 +10,7 @@ export class RestClient<T> {
 
     private fullUri: string;
 
-    constructor(private embeddedKey: string, private resourcePath: string, private ctx: AppCtxService, private http: HttpClient) {
+    constructor(private embeddedKey: string, private resourcePath: string, private ctx: AppCtxService, private http: HttpClient, private projection: String = null) {
         this.fullUri = ctx.baseUri + resourcePath;
     }
 
@@ -18,7 +18,8 @@ export class RestClient<T> {
         const httpOptions = this.ctx.buildHttpOptions({
             params: {
                 size: +size,
-                page: String(pageNum)
+                page: String(pageNum),
+                ...(this.projection ? { projection: this.projection } : {})
             }
         });
 

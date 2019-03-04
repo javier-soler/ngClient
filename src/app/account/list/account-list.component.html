@@ -9,13 +9,13 @@
                 <th>Last Name</th>
                 <th>Age</th>
                 <th>Email</th>
+                <th>Profile</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let u of list">
                 <td>
-                    <a class="vv-link1" [routerLink]="['./:id', {id: u.id}]" title="Edit"
-                        alt="Edit">
+                    <a class="vv-link1" [routerLink]="['./:id', {id: u.id}]" title="Edit" alt="Edit">
                         <i class="vv1 far fa-edit"></i>
                     </a>
                     <a style="margin-left: 6px" (click)="deleteObject(u)" href="javascript:void(0)" title="Edit"
@@ -28,6 +28,11 @@
                 <td>{{u.lastName}}</td>
                 <td>{{u.age}}</td>
                 <td>{{u.email}}</td>
+                <td>
+                    <a *ngIf="u.profile" [routerLink]="[ '/web/account/profiles/:id', {id: u.profile.id} ]">
+                    {{u.profile.name}}
+                    </a>
+                </td>
             </tr>
         </tbody>
     </table>

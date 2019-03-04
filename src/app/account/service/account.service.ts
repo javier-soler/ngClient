@@ -10,6 +10,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AccountService extends BaseRestService<Account>{
     constructor(_http: HttpClient, _ctx: AppCtxService) {
-        super('accounts', '/user/accounts', _http, _ctx);
+        super('accounts', '/user/accounts', _http, _ctx, 'simpleAccount');
     }
 }

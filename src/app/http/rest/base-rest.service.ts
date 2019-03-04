@@ -13,8 +13,8 @@ export class BaseRestService<T extends { id: number }> {
     private list: T[];
     private client: RestClient<T>;
 
-    constructor(embeddedKey: string, uri: string, http: HttpClient, private ctx: AppCtxService) {
-        this.client = new RestClient<T>(embeddedKey, uri, ctx, http);
+    constructor(embeddedKey: string, uri: string, http: HttpClient, private ctx: AppCtxService, private projection: String = null) {
+        this.client = new RestClient<T>(embeddedKey, uri, ctx, http, this.projection);
     }
 
     getList(page = 1): Observable<PageableResponse<T>> {
@@ -27,7 +27,8 @@ export class BaseRestService<T extends { id: number }> {
     }
 
     create(o: T) {
-        return this.client.create(o);
+        //fixme tenantid cannot be hardcoded ok?
+        return this.client.create({ ...o, tenantId: 1 });
     }
 
     update(o: T) {
