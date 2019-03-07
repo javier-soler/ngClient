@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Account } from '../account';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Profile } from '../profile/profile';
+import { ProfileService } from '../profile/service/profile.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-account-form',
@@ -10,6 +13,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AccountFormComponent implements OnInit {
     @Input() acc: Account;
     @Output() submittEmitter: EventEmitter<Account> = new EventEmitter();
+    profiles$: Observable<Profile[]>;
+
     accountForm = this.fb.group({
         id: [''],
         userName: ['', Validators.required],
@@ -18,13 +23,15 @@ export class AccountFormComponent implements OnInit {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        age: ['', [Validators.required, Validators.min(1), Validators.max(130)]]
+        age: ['', [Validators.required, Validators.min(1), Validators.max(130)]],
+        profileId: ['', Validators.required]
     });
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: FormBuilder, private profileSrv: ProfileService) { }
 
     ngOnInit() {
         this.accountForm.patchValue({ rePassword: '', ...this.acc });
+        this.profiles$ = this.profileSrv.getAll();
     }
 
     submitForm(): void {

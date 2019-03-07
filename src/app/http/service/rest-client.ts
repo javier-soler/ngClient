@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { PageableResponse } from './pageable-response';
 import { Page } from './page';
 import { map } from 'rxjs/operators';
-import { AppCtxService } from '../../app-context.service';
+import { AppCtxService } from '../../context/app-context.service';
 
 
 export class RestClient<T> {

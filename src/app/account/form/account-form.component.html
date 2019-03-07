@@ -58,5 +58,15 @@
         <label for="inputAddress2">Address 2</label>
         <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
     </div-->
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmail">Email</label>
+            <select class="form-control" formControlName="profileId">
+                <option>-----</option>
+                <option *ngFor="let item of profiles$ | async" value="{{item.id}}">{{item.name}}</option>
+            </select>
+        </div>
+    </div>
+
     <button type="submit" class="btn btn-primary" (click)="submitForm()" [disabled]="!accountForm.valid">Submit</button>
 </form>

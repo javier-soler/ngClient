@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { AppCtxService } from 'src/app/context/app-context.service';
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class MenuService {
-
     menu = [
         {
             title: 'Account Management', items: [
@@ -22,7 +22,7 @@ export class MenuService {
         }
     ];
 
-    constructor() { }
+    constructor(ctx: AppCtxService) { }
 
     getMenu(): Observable<any> {
         return of(this.menu);

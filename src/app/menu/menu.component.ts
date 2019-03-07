@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from './service/menu.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-menu',
@@ -8,11 +9,15 @@ import { MenuService } from './service/menu.service';
 })
 export class MenuComponent implements OnInit {
 
-    menu;
-    constructor(private srv: MenuService) { }
+    menu: [];
+    constructor(private srv: MenuService, private http: HttpClient) { }
 
     ngOnInit() {
         this.srv.getMenu().subscribe(m => this.menu = m);
+    }
+
+    logOut(): void {
+       this.http.post('/logout',{}).subscribe();
     }
 
 }

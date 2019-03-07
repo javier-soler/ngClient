@@ -1,6 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Principal } from './Principal';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -10,13 +12,19 @@ export class AppCtxService {
     principal: Principal;
 
     constructor(private http: HttpClient) {
-        this.onInit();
     }
 
-    onInit(): void {
+    getPrincipal(): Observable<Principal> {
         this.baseUri = '';
-        this.http.get<Principal>(this.baseUri + '/user/me', this.buildHttpOptions())
-            .subscribe(r => this.principal = r);
+        return this.http.get<Principal>(
+            this.baseUri + '/user/me', this.buildHttpOptions()
+        )
+            .pipe(map(r => {
+                this.principal = r;
+                return r;
+            },
+            error => console.log('error')            
+            ));
     }
 
     buildHttpOptions(additional?): {

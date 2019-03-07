@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AppCtxService } from '../../app-context.service';
+import { AppCtxService } from '../../context/app-context.service';
 import { PageableResponse } from '../service/pageable-response';
 import { RestClient } from '../service/rest-client';
 
@@ -11,7 +11,7 @@ import { RestClient } from '../service/rest-client';
 })
 export class BaseRestService<T extends { id: number }> {
     private list: T[];
-    private client: RestClient<T>;
+    protected client: RestClient<T>;
 
     constructor(embeddedKey: string, uri: string, http: HttpClient, private ctx: AppCtxService, private projection: String = null) {
         this.client = new RestClient<T>(embeddedKey, uri, ctx, http, this.projection);
@@ -20,7 +20,6 @@ export class BaseRestService<T extends { id: number }> {
     getList(page = 1): Observable<PageableResponse<T>> {
         return this.client.getList(page - 1, 3);
     }
-
 
     findById(id: number): Observable<T> {
         return this.client.getSingleObject(id);
